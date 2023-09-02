@@ -3,30 +3,45 @@ package learning;
 public class Main {
     public static void main(String[] args) {
 
+        Circle circle1 = new Circle();
+        System.out.println("The area of the circle of radius "
+                + circle1.radius + " is " + circle1.getArea());
 
-        char[][] answers = {
-                {'A', 'B', 'A', 'C', 'C', 'D', 'E', 'E', 'A', 'D'},
-                {'D', 'B', 'A', 'B', 'C', 'A', 'E', 'E', 'A', 'D'},
-                {'E', 'D', 'D', 'A', 'C', 'B', 'E', 'E', 'A', 'D'},
-                {'C', 'B', 'A', 'E', 'D', 'C', 'E', 'E', 'A', 'D'},
-                {'A', 'B', 'D', 'C', 'C', 'D', 'E', 'E', 'A', 'D'},
-                {'B', 'B', 'E', 'C', 'C', 'D', 'E', 'E', 'A', 'D'},
-                {'B', 'B', 'A', 'C', 'C', 'D', 'E', 'E', 'A', 'D'},
-                {'E', 'B', 'E', 'C', 'C', 'D', 'E', 'E', 'A', 'D'}};
+        Circle circle2 = new Circle(25);
+        System.out.println("The area of the circle of radius "
+                + circle2.radius + " is " + circle2.getArea());
 
-        char[] keys = {'D', 'B', 'D', 'C', 'C', 'D', 'A', 'E', 'A', 'D'};
+        Circle circle3 = new Circle(125);
+        System.out.println("The area of the circle of radius "
+                + circle3.radius + " is " + circle3.getArea());
 
-        for (int row = 0; row < answers.length; row++) {
-            int correctCount = 0;
+        circle2.radius = 100;
+        System.out.println("The area of the circle of radius "
+                + circle2.radius + " is " + circle2.getArea());
 
-            for (int collum = 0; collum < answers[row].length; collum++) {
-                if (keys[collum] == answers[row][collum]) {
-                    correctCount++;
-                }
-            }
-            System.out.println("Student " + row + "'s correct count is " +
-                    correctCount);
-        }
     }
 }
 
+class Circle {
+    double radius;
+
+    Circle() {
+        radius = 1;
+    }
+
+    Circle(double newRadius) {
+        radius = newRadius;
+    }
+
+    double getArea() {
+        return radius * radius * Math.PI;
+    }
+
+    double getPerimeter() {
+        return 2 * radius * Math.PI;
+    }
+
+    void setRadius(double newRadius) {
+        radius = newRadius;
+    }
+}

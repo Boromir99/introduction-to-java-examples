@@ -3,11 +3,13 @@ package learning;
 public class Main {
     public static void main(String[] args) {
 
-        Triangle triangle = new Triangle(1, 2, 2, "redSuperclasses and Subclasses");
+        Account account = new Account("George", 1122, 20000);
+        account.setAnnualInterestRate(4.5);
+        account.withdraw(2500);
+        account.deposit(3000);
 
-        System.out.println(triangle.getArea());
-        System.out.println(triangle.getPerimeter());
-        System.out.println(triangle.toString());
+        System.out.println(account.toString());
+
 
     }
 }

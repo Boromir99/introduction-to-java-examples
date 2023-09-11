@@ -1,28 +1,17 @@
 package learning;
 
 
-import java.io.*;
-
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
-        DataOutputStream output =
-                new DataOutputStream(new FileOutputStream("temp.dat"));
-
-        // Write student test scores to the file
-        output.writeUTF("John");
-        output.writeDouble(85.5);
-        output.writeUTF("Jim");
-        output.writeDouble(185.5);
-        output.writeUTF("George");
-        output.writeDouble(105.25);
-
-        DataInputStream input =
-                new DataInputStream(new FileInputStream("temp.dat"));
-
-        // Read student test scores from the file
-        System.out.println(input.readUTF() + " " + input.readDouble());
-        System.out.println(input.readUTF() + " " + input.readDouble());
-        System.out.println(input.readUTF() + " " + input.readDouble());
+        System.out.printf("%-10s%-15s\n", "i", "m(i)");
+        for (int i = 1; i <= 10; i++)
+            System.out.printf("%-10d%-15.6f\n", i, m(i));
+    }
+    public static double m(int n){
+        if (n == 0)
+            return 1;
+        else
+            return m(n - 1) + 1.0 / n;
     }
 }

@@ -3,15 +3,25 @@ package learning;
 
 public class Main {
     public static void main(String[] args) {
+        int character = 0;
+        int number = 0;
 
-        System.out.printf("%-10s%-15s\n", "i", "m(i)");
-        for (int i = 1; i <= 10; i++)
-            System.out.printf("%-10d%-15.6f\n", i, m(i));
-    }
-    public static double m(int n){
-        if (n == 0)
-            return 1;
-        else
-            return m(n - 1) + 1.0 / n;
+        String password = "Georgica78";
+
+        for (int i = 0; i < password.length(); i++) {
+            if (Character.isLetter(password.charAt(i))) {
+                character++;
+            } else if (Character.isDigit(password.charAt(i))) {
+                number++;
+            } else {
+                System.out.println("Invalid password");
+                break;
+            }
+        }
+        if (character + number < 8)
+            System.out.println("To short");
+        else if (number < 2)
+            System.out.println("To few digits");
+        else System.out.println("Is Valid");
     }
 }

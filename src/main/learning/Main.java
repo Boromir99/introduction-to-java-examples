@@ -1,6 +1,5 @@
 package learning;
 
-
 import java.util.Scanner;
 
 public class Main {

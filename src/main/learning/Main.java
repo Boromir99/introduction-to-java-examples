@@ -7,34 +7,31 @@ public class Main {
 
     public static void main(String[] args) {
 
-        java.util.Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         String string = input.next();
-        subStr(string);
+        String substring = input.next();
+        System.out.print(indexMatched(string, substring));
 
     }
 
-    public static void subStr(String string) {
-        int subStrindexStart = 0;
-        int subStrIndexEnd = 0;
+    public static int indexMatched(String string, String substring) {
+        int index = 0;
         int count = 0;
 
+        if (substring.length() > string.length()) {
+            System.out.println("Substring is larger then the string");
+            return 0;
+        }
         for (int i = 0; i < string.length(); i++) {
-            int j;
-            for (j = 0; i + j < string.length() - 1; j++) {
-                if (string.charAt(i + j) >= string.charAt(i + j + 1)) {
-                    break;
-                }
+            for (int j = 0; j < substring.length(); j++) {
+                if (substring.charAt(j) == string.charAt(i + j)) {
+                    count++;
+                } else break;
             }
-            if (j > count) {
-                count = j;
-                subStrindexStart = i;
-                subStrIndexEnd = subStrindexStart + count;
-                i += j;
-            }
+            if (count == substring.length())
+                index = i;
+            count = 0;
         }
-
-        for (int i = subStrindexStart; i <= subStrIndexEnd; i++) {
-            System.out.print(string.charAt(i));
-        }
+        return index;
     }
 }

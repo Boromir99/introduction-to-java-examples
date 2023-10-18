@@ -1,42 +1,32 @@
 package learning;
 
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
-        primeNumber(1000000);
-        desplayFile();
+        GenericStack<String> names = new GenericStack<>();
 
-    }
+        names.push("John");
+        names.push("Otis");
+        names.push("Otis");
+        names.push("Maria");
+        names.push("Maria");
+        names.push("Maria");
+        names.push("Denis");
 
-    static void primeNumber(int maxNumber) throws IOException {
-        int a = 0;
+        System.out.println(names.string());
+        System.out.println(names.empty());
+        System.out.println(names.peek());
+        System.out.println(names.pop());
 
-        try (FileOutputStream output = new FileOutputStream("temp.dat")){
-            for (int i = 2; i <= maxNumber; i++) {
-                for (int j = 2; j < i / 2; j++) {
-                    a = i % j;
-                    if (a == 0) {
-                        break;
-                    }
-                }
-                if (a != 0) {
-                    output.write(i);
-                }
-                a = 0;
-            }
-        }
-    }
+        GenericStack.removeDuplicates(names);
+        System.out.println("Without duplicates " + names.string());
 
-    static void desplayFile() throws IOException {
-        try(FileInputStream input = new FileInputStream("temp.dat")) {
-            int value;
-            while ((value = input.read()) != -1)
-                System.out.print(value + " ");
-        }
+        GenericStack.shuffle(names);
+        System.out.println("Shuffle " + names.string());
+
+        GenericStack.sort(names);
+        System.out.println("Sort " + names.string());
+
     }
 }

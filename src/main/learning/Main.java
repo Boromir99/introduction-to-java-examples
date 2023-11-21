@@ -1,68 +1,52 @@
 package learning;
 
 
+import java.io.*;
 import java.util.*;
 
 public class Main {
 
-    public static int N = 50000;
+    public static void main(String[] args) throws Exception {
 
-    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter a Java source file: ");
+        String filename = input.nextLine();
 
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < N; i++) {
-            list.add(i);
+        File file = new File(filename);
+        if (file.exists()) {
+            System.out.println("The number of keywords in " +
+                    filename + " is " + countKeywords(file));
         }
-        Collections.shuffle(list);
-
-        Collection<Integer> set1 = new HashSet<>(list);
-        System.out.println("Member test time for hash set is " +
-                getTestTime(set1) + " milliseconds");
-        System.out.println("Remove element time for hash set is " +
-                getRemoveTime(set1) + " milliseconds");
-
-        Collection<Integer> set2 = new LinkedHashSet<>(list);
-        System.out.println("Member test time for Linked hash set is " +
-                getTestTime(set2) + " milliseconds");
-        System.out.println("Remove element time for Linked hash set is " +
-                getRemoveTime(set2) + " milliseconds");
-
-        Collection<Integer> set3 = new TreeSet<>(list);
-        System.out.println("Member test time for Tree set is " +
-                getTestTime(set3) + " milliseconds");
-        System.out.println("Remove element time for Tree set is " +
-                getRemoveTime(set3) + " milliseconds");
-
-        Collection<Integer> list1 = new ArrayList<>(list);
-        System.out.println("Member test time for hash set is " +
-                getTestTime(list1) + " milliseconds");
-        System.out.println("Remove element time for hash set is " +
-                getRemoveTime(list1) + " milliseconds");
-
-        Collection<Integer> list2 = new LinkedList<>(list);
-        System.out.println("Member test time for hash set is " +
-                getTestTime(list2) + " milliseconds");
-        System.out.println("Remove element time for hash set is " +
-                getRemoveTime(list2) + " milliseconds");
+        else {
+            System.out.println("File " + filename + " does not exist");
+        }
 
     }
 
-    public static long getTestTime(Collection<Integer> c) {
-        long startTime = System.currentTimeMillis();
+    public static int countKeywords(File file) throws Exception {
+        String[] keywordString = {"abstract", "assert", "boolean",
+                "break", "byte", "case", "catch", "char", "class", "const",
+                "continue", "default", "do", "double", "else", "enum",
+                "extends", "for", "final", "finally", "float", "goto",
+                "if", "implements", "import", "instanceof", "int",
+                "interface", "long", "native", "new", "package", "private",
+                "protected", "public", "return", "short", "static",
+                "strictfp", "super", "switch", "synchronized", "this",
+                "throw", "throws", "transient", "try", "void", "volatile",
+                "while", "true", "false", "null"};
 
-        for (int i = 0; i < N; i++) {
-            c.contains((int) (Math.random() * 2 * N));
+        Set<String> keywordSet = new HashSet<>(Arrays.asList(keywordString));
+        int count = 0;
+
+        Scanner input = new Scanner(file);
+
+        while (input.hasNext()) {
+            String word = input.next();
+            if (keywordSet.contains(word))
+                count++;
         }
-        return System.currentTimeMillis() - startTime;
-    }
 
-    public static long getRemoveTime(Collection<Integer> c) {
-        long startTime = System.currentTimeMillis();
-
-        for (int i = 0; i < N; i++) {
-            c.remove(i);
-        }
-        return System.currentTimeMillis() - startTime;
+        return count;
     }
 }
 

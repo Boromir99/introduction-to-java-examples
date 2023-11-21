@@ -1,32 +1,70 @@
 package learning;
 
 
+import java.util.*;
+
 public class Main {
+
+    public static int N = 50000;
+
     public static void main(String[] args) {
 
-        GenericStack<String> names = new GenericStack<>();
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            list.add(i);
+        }
+        Collections.shuffle(list);
 
-        names.push("John");
-        names.push("Otis");
-        names.push("Otis");
-        names.push("Maria");
-        names.push("Maria");
-        names.push("Maria");
-        names.push("Denis");
+        Collection<Integer> set1 = new HashSet<>(list);
+        System.out.println("Member test time for hash set is " +
+                getTestTime(set1) + " milliseconds");
+        System.out.println("Remove element time for hash set is " +
+                getRemoveTime(set1) + " milliseconds");
 
-        System.out.println(names.string());
-        System.out.println(names.empty());
-        System.out.println(names.peek());
-        System.out.println(names.pop());
+        Collection<Integer> set2 = new LinkedHashSet<>(list);
+        System.out.println("Member test time for Linked hash set is " +
+                getTestTime(set2) + " milliseconds");
+        System.out.println("Remove element time for Linked hash set is " +
+                getRemoveTime(set2) + " milliseconds");
 
-        GenericStack.removeDuplicates(names);
-        System.out.println("Without duplicates " + names.string());
+        Collection<Integer> set3 = new TreeSet<>(list);
+        System.out.println("Member test time for Tree set is " +
+                getTestTime(set3) + " milliseconds");
+        System.out.println("Remove element time for Tree set is " +
+                getRemoveTime(set3) + " milliseconds");
 
-        GenericStack.shuffle(names);
-        System.out.println("Shuffle " + names.string());
+        Collection<Integer> list1 = new ArrayList<>(list);
+        System.out.println("Member test time for hash set is " +
+                getTestTime(list1) + " milliseconds");
+        System.out.println("Remove element time for hash set is " +
+                getRemoveTime(list1) + " milliseconds");
 
-        GenericStack.sort(names);
-        System.out.println("Sort " + names.string());
+        Collection<Integer> list2 = new LinkedList<>(list);
+        System.out.println("Member test time for hash set is " +
+                getTestTime(list2) + " milliseconds");
+        System.out.println("Remove element time for hash set is " +
+                getRemoveTime(list2) + " milliseconds");
 
     }
+
+    public static long getTestTime(Collection<Integer> c) {
+        long startTime = System.currentTimeMillis();
+
+        for (int i = 0; i < N; i++) {
+            c.contains((int) (Math.random() * 2 * N));
+        }
+        return System.currentTimeMillis() - startTime;
+    }
+
+    public static long getRemoveTime(Collection<Integer> c) {
+        long startTime = System.currentTimeMillis();
+
+        for (int i = 0; i < N; i++) {
+            c.remove(i);
+        }
+        return System.currentTimeMillis() - startTime;
+    }
 }
+
+
+

@@ -1,52 +1,43 @@
 package learning;
 
 
-import java.io.*;
 import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter a Java source file: ");
-        String filename = input.nextLine();
+        Set<String> names1 = new HashSet<>();
+        Set<String> names2 = new HashSet<>();
 
-        File file = new File(filename);
-        if (file.exists()) {
-            System.out.println("The number of keywords in " +
-                    filename + " is " + countKeywords(file));
-        }
-        else {
-            System.out.println("File " + filename + " does not exist");
-        }
+        names1.add("George");
+        names1.add("Jim");
+        names1.add("John");
+        names1.add("Blake");
+        names1.add("Kevin");
+        names1.add("Michael");
 
-    }
+        names2.add("George");
+        names2.add("Katie");
+        names2.add("Kevin");
+        names2.add("Michelle");
+        names2.add("Ryan");
 
-    public static int countKeywords(File file) throws Exception {
-        String[] keywordString = {"abstract", "assert", "boolean",
-                "break", "byte", "case", "catch", "char", "class", "const",
-                "continue", "default", "do", "double", "else", "enum",
-                "extends", "for", "final", "finally", "float", "goto",
-                "if", "implements", "import", "instanceof", "int",
-                "interface", "long", "native", "new", "package", "private",
-                "protected", "public", "return", "short", "static",
-                "strictfp", "super", "switch", "synchronized", "this",
-                "throw", "throws", "transient", "try", "void", "volatile",
-                "while", "true", "false", "null"};
+        System.out.println("Set1: " + names1);
+        System.out.println("Set2: " + names2);
 
-        Set<String> keywordSet = new HashSet<>(Arrays.asList(keywordString));
-        int count = 0;
+        Set<String> unionNames = new HashSet<>(names1);
+        unionNames.addAll(names2);
+        System.out.println("Union: " + unionNames);
 
-        Scanner input = new Scanner(file);
+        Set<String> differenceNames = new HashSet<>(names1);
+        differenceNames.retainAll(names2);
+        unionNames.removeAll(differenceNames);
+        System.out.println("Difference: " + unionNames);
 
-        while (input.hasNext()) {
-            String word = input.next();
-            if (keywordSet.contains(word))
-                count++;
-        }
-
-        return count;
+        Set<String> intersectionNames = new HashSet<>(names1);
+        intersectionNames.retainAll(names2);
+        System.out.println("Intersection: " + intersectionNames);
     }
 }
 

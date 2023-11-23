@@ -1,46 +1,27 @@
 package learning;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+
 import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
-        String[] names = {"George", "Jim", "John", "Blake", "Kevin", "Michael",
-                "George", "Katie", "Kevin", "Michelle", "Ryan"};
+        String text = "Good morning. Have a good class. " +
+                "Have a good visit. Have fun!";
 
-        Set<String> setWriter = new TreeSet<>(Arrays.asList(names));
+        Map<String, Integer> map = new TreeMap<>();
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\denis\\Desktop\\output.txt"));
-        for (String name : setWriter) {
-            writer.write(" " + name);
-        }
-        writer.close();
+        String[] words = text.split("[\\s+\\p{P}]");
 
-        /////////////////////////////////////////////////////////////////////
-        Set<Character> vowels = new TreeSet<>();
+        for (int i = 0; i < words.length; i++) {
+            String key = words[i].toLowerCase();
 
-        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\denis\\Desktop\\output.txt"));
-
-        HashSet<Character> hashSet = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
-
-        int character;
-        int countV = 0, countC = 0;
-        while ((character = reader.read()) != -1) {
-            char charValue = Character.toLowerCase((char) character);
-
-            if (hashSet.contains(charValue)) {
-                vowels.add(charValue);
-                countV++;
+            if (key.length() > 0) {
+                map.put(key, map.containsKey(key) ? map.get(key) + 1 : 1);
             }
-            else countC++;
         }
-        System.out.print(vowels + "\nvowels " + countV + "\nconsonants " + countC);
-        reader.close();
+        map.forEach((k, v) ->System.out.println(k + "\t" + v));
     }
 }
 

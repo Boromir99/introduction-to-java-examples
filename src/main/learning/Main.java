@@ -6,24 +6,36 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        String text = "Good morning. Have a good class. " +
-                "Have a good visit. Have fun!";
+        HashMap<Integer, Integer> occurrences = new HashMap<>();
 
-        Map<String, Integer> map = new TreeMap<>();
+        System.out.println("Enter integers (enter a non-integer to finish):");
 
-        String[] words = text.split("[\\s+\\p{P}]");
+        // Read integers until a non-integer is entered
+        while (scanner.hasNextInt()) {
+            int number = scanner.nextInt();
 
-        for (int i = 0; i < words.length; i++) {
-            String key = words[i].toLowerCase();
-
-            if (key.length() > 0) {
-                map.put(key, map.containsKey(key) ? map.get(key) + 1 : 1);
-            }
+            occurrences.put(number, occurrences.getOrDefault(number, 0) + 1);
         }
-        map.forEach((k, v) ->System.out.println(k + "\t" + v));
+            // Find the number with the most occurrences
+            int mostOccurringNumber = 0;
+            int maxOccurrences = 0;
+
+            for (Map.Entry<Integer, Integer> entry : occurrences.entrySet()) {
+                if (entry.getValue() > maxOccurrences) {
+                    mostOccurringNumber = entry.getKey();
+                    maxOccurrences = entry.getValue();
+                }
+            }
+
+        // Display the result
+        System.out.println("The number with the most occurrences is: " + mostOccurringNumber);
+        System.out.println("Number of occurrences: " + maxOccurrences);
+        }
+
     }
-}
+
 
 
 

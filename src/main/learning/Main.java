@@ -16,18 +16,30 @@ public class Main {
         Set<String> setWriter = new TreeSet<>(Arrays.asList(names));
 
         BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\denis\\Desktop\\output.txt"));
-        for (String name: setWriter){
+        for (String name : setWriter) {
             writer.write(" " + name);
         }
         writer.close();
 
         /////////////////////////////////////////////////////////////////////
+        Set<Character> vowels = new TreeSet<>();
 
         BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\denis\\Desktop\\output.txt"));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            System.out.println(line);
+
+        HashSet<Character> hashSet = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
+
+        int character;
+        int countV = 0, countC = 0;
+        while ((character = reader.read()) != -1) {
+            char charValue = Character.toLowerCase((char) character);
+
+            if (hashSet.contains(charValue)) {
+                vowels.add(charValue);
+                countV++;
+            }
+            else countC++;
         }
+        System.out.print(vowels + "\nvowels " + countV + "\nconsonants " + countC);
         reader.close();
     }
 }

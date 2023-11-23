@@ -1,43 +1,34 @@
 package learning;
 
-
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
-        Set<String> names1 = new HashSet<>();
-        Set<String> names2 = new HashSet<>();
+        String[] names = {"George", "Jim", "John", "Blake", "Kevin", "Michael",
+                "George", "Katie", "Kevin", "Michelle", "Ryan"};
 
-        names1.add("George");
-        names1.add("Jim");
-        names1.add("John");
-        names1.add("Blake");
-        names1.add("Kevin");
-        names1.add("Michael");
+        Set<String> setWriter = new TreeSet<>(Arrays.asList(names));
 
-        names2.add("George");
-        names2.add("Katie");
-        names2.add("Kevin");
-        names2.add("Michelle");
-        names2.add("Ryan");
+        BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\denis\\Desktop\\output.txt"));
+        for (String name: setWriter){
+            writer.write(" " + name);
+        }
+        writer.close();
 
-        System.out.println("Set1: " + names1);
-        System.out.println("Set2: " + names2);
+        /////////////////////////////////////////////////////////////////////
 
-        Set<String> unionNames = new HashSet<>(names1);
-        unionNames.addAll(names2);
-        System.out.println("Union: " + unionNames);
-
-        Set<String> differenceNames = new HashSet<>(names1);
-        differenceNames.retainAll(names2);
-        unionNames.removeAll(differenceNames);
-        System.out.println("Difference: " + unionNames);
-
-        Set<String> intersectionNames = new HashSet<>(names1);
-        intersectionNames.retainAll(names2);
-        System.out.println("Intersection: " + intersectionNames);
+        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\denis\\Desktop\\output.txt"));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+        reader.close();
     }
 }
 

@@ -1,41 +1,40 @@
 package learning;
 
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws Exception {
+        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\denis\\Desktop\\123.txt"));
+        String line;
 
-        HashMap<Integer, Integer> occurrences = new HashMap<>();
+        Map<String, Integer> counting = new TreeMap<>();
 
-        System.out.println("Enter integers (enter a non-integer to finish):");
+        while ((line = reader.readLine()) != null) {
+            String[] words = line.split("[\\s,+;.:?='\"(){}<>]+");
 
-        // Read integers until a non-integer is entered
-        while (scanner.hasNextInt()) {
-            int number = scanner.nextInt();
+            for (String word : words) {
+                String lowercaseWord = word.toLowerCase();
+                counting.put(lowercaseWord, counting.getOrDefault(lowercaseWord, 0) + 1);
 
-            occurrences.put(number, occurrences.getOrDefault(number, 0) + 1);
-        }
-            // Find the number with the most occurrences
-            int mostOccurringNumber = 0;
-            int maxOccurrences = 0;
-
-            for (Map.Entry<Integer, Integer> entry : occurrences.entrySet()) {
-                if (entry.getValue() > maxOccurrences) {
-                    mostOccurringNumber = entry.getKey();
-                    maxOccurrences = entry.getValue();
-                }
             }
-
-        // Display the result
-        System.out.println("The number with the most occurrences is: " + mostOccurringNumber);
-        System.out.println("Number of occurrences: " + maxOccurrences);
         }
-
+        // Print the first 5 entries and then start a new line
+        int count = 0;
+        for (Map.Entry<String, Integer> entry : counting.entrySet()) {
+            System.out.print(entry.getKey() + " " + entry.getValue() + "   ");
+            count++;
+            if (count == 5) {
+                System.out.println(); // Start a new line after the 5th entry
+                count = 0;
+            }
+        }
+        reader.close();
     }
-
+}
 
 
 

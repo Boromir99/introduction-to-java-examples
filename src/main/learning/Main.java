@@ -1,40 +1,35 @@
 package learning;
 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
-        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\denis\\Desktop\\123.txt"));
-        String line;
+    public static void main(String[] args) {
 
-        Map<String, Integer> counting = new TreeMap<>();
+        // Create a map to store state-capital pairs
+        Map<String, String> stateCapitalMap = new HashMap<>();
 
-        while ((line = reader.readLine()) != null) {
-            String[] words = line.split("[\\s,+;.:?='\"(){}<>]+");
+        // Add state-capital pairs to the map
+        stateCapitalMap.put("Romania", "Bucuresti");
+        stateCapitalMap.put("Italy", "Roma");
+        // Add more states and capitals as needed
 
-            for (String word : words) {
-                String lowercaseWord = word.toLowerCase();
-                counting.put(lowercaseWord, counting.getOrDefault(lowercaseWord, 0) + 1);
+        // Prompt the user to enter a state
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a state: ");
+        String state = scanner.nextLine();
 
-            }
+        // Display the capital for the entered state
+        if (stateCapitalMap.containsKey(state)) {
+            String capital = stateCapitalMap.get(state);
+            System.out.println("The capital of " + state + " is " + capital + ".");
+        } else {
+            System.out.println("Sorry, the capital for " + state + " is not available in the map.");
         }
-        // Print the first 5 entries and then start a new line
-        int count = 0;
-        for (Map.Entry<String, Integer> entry : counting.entrySet()) {
-            System.out.print(entry.getKey() + " " + entry.getValue() + "   ");
-            count++;
-            if (count == 5) {
-                System.out.println(); // Start a new line after the 5th entry
-                count = 0;
-            }
-        }
-        reader.close();
     }
 }
-
 
 

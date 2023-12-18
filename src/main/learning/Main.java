@@ -1,32 +1,43 @@
 package learning;
 
 
-public class Main {
+import java.util.*;
 
+public class Main {
     public static void main(String[] args) {
 
-        int[] ints = {1, 2, 4, 9, 5, 6, 7};
-        System.out.println(binarySearch(ints, 8));
-    }
+        int[] list = {2, 3, 5, 3, 7, 9, 5, 3, 7};
+        int[] list2 = new int[list.length];
+        int index = 0;
 
-    private static int binarySearch(int[] numbers, int numberToFind) {
-        int low = 0;
-        int high = numbers.length - 1;
+        Map<Integer, Integer> valueMap = new TreeMap<>();
+        for (int n : list) {
+            valueMap.put(n, valueMap.getOrDefault(n, 0) + 1);
+        }
+        List<Map.Entry<Integer, Integer>> entryList = new ArrayList<>(valueMap.entrySet());
 
-        while (low <= high) {
-            int middlePosition = (low + high) / 2;
-            int middleNumber = numbers[middlePosition];
+        Comparator<Map.Entry<Integer, Integer>> valueComparator =
+                Comparator.comparing(Map.Entry::getValue, Comparator.reverseOrder());
 
-            if (numberToFind == middleNumber) {
-                return middlePosition;
-            }
-            if (numberToFind < middleNumber) {
-                high = middlePosition - 1;
-            } else {
-                low = middlePosition + 1;
+        entryList.sort(valueComparator);
+
+        Map<Integer, Integer> ordonare = new LinkedHashMap<>();
+        for (Map.Entry<Integer, Integer> entry : entryList) {
+            ordonare.put(entry.getKey(), entry.getValue());
+        }
+
+        System.out.println(ordonare);
+
+        for (Map.Entry<Integer, Integer> entry : ordonare.entrySet()) {
+            int key = entry.getKey();
+            int value = entry.getValue();
+
+            for (int i = 0; i < value; i++) {
+                list2[index] = key;
+                index++;
             }
         }
-        return -1;
+        System.out.println(Arrays.toString(list2));
     }
 }
 

@@ -4,31 +4,23 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int[] arr = {1, 8, 6, 2, 30, 4, 8, 3, 9};
-        System.out.println(container(arr));
-
+        int[] nums = {-2, 1, -3, 4, -1, -2, 1, -5, 4};
+        System.out.println(subArray(nums));
     }
 
-    public static int container(int[] arr) {
-        int minArea;
-        int maxArea = 0;
-        int hMin;
-
+    public static int subArray(int[] arr) {
+        int maxSum = 0;
         for (int i = 0; i < arr.length; i++) {
+            int minSum = arr[i];
             for (int j = i + 1; j < arr.length; j++) {
-                if (arr[i] < arr[j]) {
-                    hMin = i;
-                } else {
-                    hMin = j;
+                if (minSum > maxSum) {
+                    maxSum = minSum;
                 }
-                int dist = j - i;
-                minArea = arr[hMin] * dist;
-                if (minArea > maxArea){
-                    maxArea = minArea;
-                }
+                minSum += arr[j];
+
             }
         }
-        return maxArea;
+        return maxSum;
     }
 }
 

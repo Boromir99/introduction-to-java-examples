@@ -4,26 +4,38 @@ public class Main {
 
     public static void main(String[] args) {
 
-        BinarySearchTree<Integer> binarySearchTree = new BinarySearchTree<>();
+        System.out.println(happyNumber(19));
+    }
 
-        binarySearchTree.insert(new Node<>(10));
-        binarySearchTree.insert(new Node<>(5));
-        binarySearchTree.insert(new Node<>(2));
-        binarySearchTree.insert(new Node<>(6));
-        binarySearchTree.insert(new Node<>(7));
-        binarySearchTree.insert(new Node<>(8));
-        binarySearchTree.insert(new Node<>(4));
-        binarySearchTree.insert(new Node<>(1));
-        binarySearchTree.insert(new Node<>(9));
+    public static int sumOfSquares(int n) {
+        int sum = 0;
+        while (n > 0) {
+            int d = n % 10;
+            sum += d;
+            n = n / 10;
+        }
+        return sum;
+    }
 
-        binarySearchTree.display();
+    public static boolean happyNumber(int n) {
+        if (n < 0) {
+            return false;
+        }
 
-        System.out.println();
+        int slowSum = n;
+        int fastSum = sumOfSquares(slowSum);
+        if (slowSum == 1 && fastSum == 1) {
+            return true;
+        }
 
-        binarySearchTree.remove(5);
-        binarySearchTree.display();
-
-
+        while (slowSum != fastSum) {
+            slowSum = sumOfSquares(slowSum);
+            fastSum = sumOfSquares(sumOfSquares(fastSum));
+            if (slowSum == 1 || fastSum == 1) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

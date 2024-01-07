@@ -5,22 +5,27 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println(lengthOgLastWord("Hello World"));
+        System.out.println(sqrt(8));
 
     }
 
-    public static int lengthOgLastWord(String s){
-        int i = s.length() - 1, length = 0;
+    public static int sqrt(int x){
+        long left = 0, right = (x / 2) + 1;
 
-        while (i >= 0 && s.charAt(i) == ' ') {
-            i--;
-        }
+        while (left < right){
+            long mid = left + (right - left) / 2 + 1;
+            long square = mid * mid;
 
-        while (i >= 0 && s.charAt(i) != ' '){
-            length++;
-            i--;
+            if (square == x){
+                return (int) mid;
+            }else if (square < x){
+                left = mid;
+            }else {
+                right = mid - 1;
+            }
         }
-        return length;
+        return (int) left;
+
     }
 }
 

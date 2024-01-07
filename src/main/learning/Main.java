@@ -5,26 +5,22 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int[] zeros = {0, 1, 0, 3, 12};
-        moveZeros(zeros);
+        System.out.println(lengthOgLastWord("Hello World"));
 
-        for (int i : zeros) {
-            System.out.print(i + " ");
-        }
     }
 
-    public static void moveZeros(int[] array) {
-        int zeros = 0;
+    public static int lengthOgLastWord(String s){
+        int i = s.length() - 1, length = 0;
 
-        for (int i = 0; i < array.length - zeros; i++) {
-            if (array[i] == 0) {
-                zeros++;
-                for (int j = i; j < array.length - zeros; j++) {
-                    array[j] = array[j + 1];
-                }
-                array[array.length - zeros] = 0;
-            }
+        while (i >= 0 && s.charAt(i) == ' ') {
+            i--;
         }
+
+        while (i >= 0 && s.charAt(i) != ' '){
+            length++;
+            i--;
+        }
+        return length;
     }
 }
 
